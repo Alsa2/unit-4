@@ -1,0 +1,3 @@
+[submodule "Project/g4"]
+	path = Project/g4
+	url = git@github.com:Alsa2/g4.git
