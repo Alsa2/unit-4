@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Request Page</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the header */
+header {
+  background-color: #666;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+  color: white;
+}
+
+/* Create two columns/boxes that floats next to each other */
+nav {
+  float: left;
+  width: 30%;
+  height: 300px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 70%;
+  background-color: #f1f1f1;
+  height: 300px; /* only for demonstration, should be removed */
+}
+
+/* Clear floats after the columns */
+section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the footer */
+footer {
+  background-color: #777;
+  padding: 10px;
+  text-align: center;
+  color: white;
+}
+
+/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
+</style>
+</head>
+<body>
+<div>
+<div><header>
+<h2>Request Page</h2>
+</header></div>
+</div>
+<div>
+<div>
+<section><nav>
+<p><img style="width: 100px; height: 100px;" src="https://avatars.githubusercontent.com/u/65710458?v=4" alt="Girl in a jacket" /></p>
+<strong>Skills:</strong>
+<ul>
+<li>Python</li>
+<li>SQL</li>
+<li>Shell</li>
+<li>C++</li>
+<li>HTML</li>
+</ul>
+</nav>
+<article>
+<h1>Alessandro Sakvetti</h1>
+<p>Hello, my name is Alex and blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla.</p>
+<p>Blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla blabla bla bla bla bla blabla bla bla bla bla bla bla blabla bla blabla bla bla bla.</p>
+</article>
+</section>
+</div>
+</div>
+<div>
+<div><footer>
+<p>Links</p>
+<p style="color: red;"><a href="github.com/Alsa2">Github</a> <a href="/post">Request</a> <a href="#">Other link</a></p>
+</footer></div>
+</div>
+  </body>
