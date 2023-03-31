@@ -24,6 +24,12 @@ def create_token(username, token_duration): #token = encoded(username, datetime)
     unix_timestamp = (datetime.now() - datetime(1970, 1, 1)).total_seconds()
     ttl = token_duration * 60 + unix_timestamp
     token  = jwt.encode({'username': username, 'datetime': unix_timestamp}, token_encryption_key, algorithm='HS256')
+    return token
+
+def get_username_from_token(token): #get username from token
+    print(token)
+    decoded_token = jwt.decode(token, token_encryption_key, algorithms=['HS256'])
+    return decoded_token['username']
 
 def check_token(token): #check if token is valid and not expired
     try:
@@ -85,6 +91,21 @@ def register():
         else:
             flash('Username already exists')
             return redirect(url_for('register'))
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'GET':
+        return render_template('add.html')
+    else:
+        title = request.form['title']
+        tags = request.form['tags']
+        content = request.form['content']
+        print(session['token'])
+        username = get_username_from_token(session['token'])
+        db = DatabaseHandler()
+        db.add_post(title, tags, content, username)
+        db.close()
+        return redirect('/')
 
 @app.route('/logout')
 def logout():

@@ -37,9 +37,10 @@ class DatabaseHandler():
         else:
             return pbkdf2_sha512.verify(unhashed_password, user.password)
     
-    def add_post(self, title, content, tags, user_id):
-        datetime = str(datetime.datetime.now())
-        post = Post(title=title, content=content, tags=tags, datetime=datetime, rating=0, user_id=user_id)
+    def add_post(self, title, content, tags, username):
+        user_id = self.get_user_by_username(username).id
+        post_datetime = datetime.datetime.now()
+        post = Post(title=title, content=content, tags=tags, datetime=post_datetime, rating=0, user_id=user_id)
         self.session.add(post)
         self.session.commit()
 
