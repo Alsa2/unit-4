@@ -2,8 +2,9 @@ import sqlite3
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from db_schema import Base, User, Post
-import datetime
 from passlib.hash import pbkdf2_sha512
+# add unix epoch time
+import datetime
 
 def create_db():
     engine = create_engine('sqlite:///database.db')
@@ -21,7 +22,7 @@ class DatabaseHandler():
         Session = sessionmaker(bind=engine)
         self.session = Session()
 
-    def close_session(self):
+    def close(self):
         self.session.close()
 
     def add_user(self, username, unhashed_password):
@@ -37,7 +38,8 @@ class DatabaseHandler():
             return pbkdf2_sha512.verify(unhashed_password, user.password)
     
     def add_post(self, title, content, tags, user_id):
-        post = Post(title=title, content=content, tags=tags, datetime=datetime.datetime.now(), rating=0, user_id=user_id)
+        datetime = str(datetime.datetime.now())
+        post = Post(title=title, content=content, tags=tags, datetime=datetime, rating=0, user_id=user_id)
         self.session.add(post)
         self.session.commit()
 
@@ -82,3 +84,6 @@ class DatabaseHandler():
         user = self.session.query(User).filter_by(id=user_id).first()
         self.session.delete(user)
         self.session.commit()
+
+if __name__ == '__main__':
+    create_db()
