@@ -11,6 +11,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     username = Column(String)
     password = Column(String)
+    role = Column(String) # admin, user
     posts = relationship("Post", backref="user")
 
 # on delete cascade
