@@ -47,8 +47,8 @@ class DatabaseHandler():
     def get_posts(self):
         return self.session.query(Post).all()
 
-    def get_post(self, post_id):
-        return self.session.query(Post).filter_by(id=post_id).first()
+    def get_posts_by_user_id(self, post_id):
+        return self.session.query(Post).filter_by(id=post_id).all()
 
     def get_user(self, user_id):
         return self.session.query(User).filter_by(id=user_id).first()
@@ -58,6 +58,9 @@ class DatabaseHandler():
     
     def get_user_by_username(self, username):
         return self.session.query(User).filter_by(username=username).first()
+
+    def get_users(self):
+        return self.session.query(User).all()
 
     def search_posts(self, query):
         return self.session.query(Post).filter(Post.title.like('%' + query + '%')).all()

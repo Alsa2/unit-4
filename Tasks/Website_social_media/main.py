@@ -105,12 +105,27 @@ def add():
         title = request.form['title']
         tags = request.form['tags']
         content = request.form['content']
-        print(session['token'])
         username = get_username_from_token(session['token'])
         db = DatabaseHandler()
         db.add_post(title, tags, content, username)
         db.close()
         return redirect('/')
+
+@app.route('/user/<username>', methods=['GET', 'POST'])
+def user(username):
+    db = DatabaseHandler()
+    user_id = db.get_user_by_username(username).id
+    posts = db.get_posts_by_user_id(user_id)
+    db.close()
+    return render_template('user.html', posts=posts, username=username)
+
+@app.route('/users')
+def users():
+    db = DatabaseHandler()
+    users = db.get_users()
+    db.close()
+    print(users)
+    return render_template('users.html', users=users)
 
 @app.route('/logout')
 def logout():
@@ -119,8 +134,7 @@ def logout():
 
 @app.route('/test')
 def test():
-    return render_template('test.html')
+    render_template('test.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=80)
-
